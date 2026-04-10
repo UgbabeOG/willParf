@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Will Parfitt — Official Tickets</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --black: #0A0A0A;
+    --charcoal: #141414;
+    --surface: #1C1C1C;
+    --surface2: #242424;
+    --text: #F0EDE8;
+    --muted: #888;
+    --border: rgba(201,168,76,0.18);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--black);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); text-decoration: none; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--gold); color: var(--black);
+    border: none; padding: 0.55rem 1.4rem;
+    font-family: 'DM Sans', sans-serif; font-size: 0.78rem;
+    font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+    cursor: pointer; transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold-light); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 6rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+    background: url('WhatsApp Image 2026-04-10 at 11.43.16 AM.jpeg') center/cover no-repeat;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 60% at 50% 80%, rgba(201,168,76,0.08) 0%, transparent 70%),
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 80px,
+        rgba(201,168,76,0.03) 80px,
+        rgba(201,168,76,0.03) 81px
+      );
+  }
+  .hero-tag {
+    font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gold); border: 1px solid var(--border);
+    padding: 0.3rem 1rem; margin-bottom: 2rem;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(5rem, 14vw, 12rem);
+    line-height: 0.9;
+    letter-spacing: 0.04em;
+    color: var(--text);
+    animation: fadeUp 0.8s 0.15s ease both;
+    position: relative;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero-sub {
+    font-size: 1rem; font-weight: 300; color: var(--muted);
+    margin-top: 1.5rem; letter-spacing: 0.05em;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+  .hero-btns {
+    display: flex; gap: 1rem; margin-top: 2.5rem;
+    animation: fadeUp 0.8s 0.45s ease both;
+    flex-wrap: wrap; justify-content: center;
+  }
+  .btn-primary {
+    background: var(--gold); color: var(--black);
+    border: none; padding: 0.9rem 2.4rem;
+    font-family: 'DM Sans', sans-serif; font-size: 0.82rem;
+    font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+    cursor: pointer; transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-ghost {
+    background: transparent; color: var(--text);
+    border: 1px solid rgba(240,237,232,0.2); padding: 0.9rem 2.4rem;
+    font-family: 'DM Sans', sans-serif; font-size: 0.82rem;
+    font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase;
+    cursor: pointer; transition: border-color 0.2s, transform 0.15s;
+  }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+  .scroll-hint {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    animation: fadeUp 1s 0.9s ease both;
+  }
+  .scroll-hint span { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+  .scroll-line {
+    width: 1px; height: 40px; background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 1.8s ease-in-out infinite;
+  }
+
+  /* SECTION SHARED */
+  section { padding: 6rem 2rem; }
+  .section-label {
+    font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.4rem, 6vw, 4.5rem);
+    letter-spacing: 0.04em; line-height: 1;
+    color: var(--text); margin-bottom: 1.5rem;
+  }
+
+  /* EVENTS */
+  #events { background: var(--charcoal); }
+  .events-inner { max-width: 860px; margin: 0 auto; }
+  .events-header { margin-bottom: 3rem; }
+  .search-container {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+  .search-input {
+    width: 100%; max-width: 400px;
+    background: var(--surface2);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: var(--text); padding: 0.8rem 1rem;
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+    outline: none; border-radius: 4px;
+    transition: border-color 0.2s;
+  }
+  .search-input:focus { border-color: var(--gold); }
+  .search-input::placeholder { color: var(--muted); }
+  .event-list { display: flex; flex-direction: column; gap: 1px; }
+  .event-item {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem 2rem;
+    background: var(--surface);
+    border-left: 2px solid transparent;
+    transition: border-color 0.2s, background 0.2s;
+    cursor: pointer;
+  }
+  .event-item:hover { border-left-color: var(--gold); background: var(--surface2); }
+  .event-date { text-align: center; }
+  .event-date .day {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem; color: var(--gold); line-height: 1;
+  }
+  .event-date .month {
+    font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted);
+  }
+  .event-info .venue { font-weight: 500; font-size: 1rem; margin-bottom: 0.25rem; }
+  .event-info .location { font-size: 0.82rem; color: var(--muted); }
+  .event-info .tag {
+    display: inline-block; margin-top: 0.5rem;
+    font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+    background: rgba(201,168,76,0.12); color: var(--gold);
+    padding: 0.18rem 0.6rem; border-radius: 0;
+  }
+  .event-action .buy-btn {
+    background: transparent; border: 1px solid var(--gold);
+    color: var(--gold); padding: 0.5rem 1.2rem;
+    font-family: 'DM Sans', sans-serif; font-size: 0.72rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    cursor: pointer; white-space: nowrap;
+    transition: background 0.2s, color 0.2s;
+  }
+  .event-action .buy-btn:hover { background: var(--gold); color: var(--black); }
+  .event-action .sold-out {
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); padding: 0.5rem 0;
+  }
+
+  /* TICKET MODAL */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    background: rgba(0,0,0,0.85); backdrop-filter: blur(6px);
+    align-items: center; justify-content: center; padding: 1rem;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--surface); border: 1px solid var(--border);
+    width: 100%; max-width: 520px; padding: 2.5rem;
+    position: relative; animation: fadeUp 0.25s ease;
+  }
+  .modal-close {
+    position: absolute; top: 1.2rem; right: 1.5rem;
+    background: none; border: none; color: var(--muted);
+    font-size: 1.4rem; cursor: pointer; line-height: 1;
+  }
+  .modal-close:hover { color: var(--text); }
+  .modal-eyebrow {
+    font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.5rem;
+  }
+  .modal h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem; letter-spacing: 0.04em;
+    margin-bottom: 1.5rem;
+  }
+  .form-group { margin-bottom: 1.1rem; }
+  .form-group label {
+    display: block; font-size: 0.72rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%; background: var(--surface2);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: var(--text); padding: 0.7rem 1rem;
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+    outline: none; transition: border-color 0.2s;
+    appearance: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--gold); }
+  .form-group textarea { resize: vertical; min-height: 80px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-submit {
+    width: 100%; background: var(--gold); color: var(--black);
+    border: none; padding: 0.9rem;
+    font-family: 'DM Sans', sans-serif; font-size: 0.82rem;
+    font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+    cursor: pointer; margin-top: 0.5rem; transition: background 0.2s;
+  }
+  .form-submit:hover { background: var(--gold-light); }
+  .ticket-price {
+    display: flex; align-items: baseline; gap: 0.5rem;
+    background: var(--surface2); padding: 0.8rem 1rem;
+    margin-bottom: 1.5rem; border-left: 2px solid var(--gold);
+  }
+  .ticket-price .price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem; color: var(--gold);
+  }
+  .ticket-price .per { font-size: 0.78rem; color: var(--muted); }
+
+  /* SUCCESS */
+  .success-msg {
+    display: none; text-align: center; padding: 1.5rem 0;
+  }
+  .success-msg .check {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: rgba(201,168,76,0.12); border: 1px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1rem; font-size: 1.4rem; color: var(--gold);
+  }
+  .success-msg h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem; letter-spacing: 0.04em; margin-bottom: 0.5rem;
+  }
+  .success-msg p { font-size: 0.9rem; color: var(--muted); }
+
+  /* GALLERY */
+  #gallery { background: var(--surface); }
+  .gallery-inner { max-width: 1200px; margin: 0 auto; }
+  .gallery-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;
+    padding: 2rem 0;
+  }
+  .gallery-item {
+    position: relative; overflow: hidden; border-radius: 8px;
+    background: var(--surface2); aspect-ratio: 16/9;
+  }
+  .gallery-item img {
+    width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s;
+  }
+  .gallery-item:hover img { transform: scale(1.05); }
+  .contact-inner {
+    max-width: 860px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1.4fr; gap: 4rem;
+    align-items: start;
+  }
+  .contact-left p { font-size: 0.95rem; color: var(--muted); line-height: 1.8; margin-bottom: 2rem; }
+  .contact-detail { margin-bottom: 1.2rem; }
+  .contact-detail .cd-label {
+    font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.2rem;
+  }
+  .contact-detail .cd-val { font-size: 0.9rem; color: var(--text); }
+  .contact-form { background: var(--surface); padding: 2rem; border: 1px solid var(--border); }
+  .contact-form h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem; letter-spacing: 0.04em; margin-bottom: 1.5rem;
+    color: var(--text);
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 2.5rem 3rem;
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem; letter-spacing: 0.12em; color: var(--gold);
+  }
+  footer p { font-size: 0.75rem; color: var(--muted); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.15); }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 700px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .event-item { grid-template-columns: 60px 1fr; }
+    .event-action { display: none; }
+    .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr; gap: 1rem; padding: 1rem 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Will Parfitt</div>
+  <ul class="nav-links">
+    <li><a href="#events">Events</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('events').scrollIntoView({behavior:'smooth'})">Get Tickets</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-tag">Official Ticketing &amp; Fan Portal</div>
+  <h1>WILL<br><span>PARFITT</span></h1>
+  <p class="hero-sub">Live experience. Exclusive access. Unforgettable nights.</p>
+  <div class="hero-btns">
+    <button class="btn-primary" onclick="document.getElementById('events').scrollIntoView({behavior:'smooth'})">Browse Events</button>
+    <button class="btn-ghost" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contact Manager</button>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section id="events">
+  <div class="events-inner">
+    <div class="events-header">
+      <p class="section-label">Upcoming Shows</p>
+      <h2 class="section-title">Tour Dates 2026</h2>
+    </div>
+    <div class="search-container">
+      <input type="text" class="search-input" id="eventSearch" placeholder="Search events by location or venue...">
+    </div>
+    <div class="event-list" id="eventList"></div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="gallery-inner">
+    <div class="section-label">Behind the Scenes</div>
+    <h2 class="section-title">Tour Gallery</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="WhatsApp Image 2026-04-10 at 11.43.17 AM.jpeg" alt="Will Parfitt Live">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-left">
+      <p class="section-label">Get In Touch</p>
+      <h2 class="section-title">Contact the Team</h2>
+      <p>For press enquiries, VIP packages, corporate bookings, or general questions — reach out to Will's management team directly.</p>
+      <div class="contact-detail">
+        <div class="cd-label">Management</div>
+        <div class="cd-val">Specialprojects638@gmail.com</div>
+      </div>
+      <div class="contact-detail">
+        <div class="cd-label">Press &amp; Media</div>
+        <div class="cd-val">Specialprojects638@gmail.com</div>
+      </div>
+      <div class="contact-detail">
+        <div class="cd-label">VIP &amp; Hospitality</div>
+        <div class="cd-val">Specialprojects638@gmail.com</div>
+      </div>
+    </div>
+    <div class="contact-form">
+      <h3>Send a Message</h3>
+      <div id="contactFormWrap">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" id="cName" placeholder="Full name">
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="cEmail" placeholder="you@example.com">
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <select id="cSubject">
+            <option value="">Select a topic…</option>
+            <option>Ticket Enquiry</option>
+            <option>VIP / Hospitality</option>
+            <option>Press & Media</option>
+            <option>Corporate Booking</option>
+            <option>Fan Message</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea id="cMessage" placeholder="How can we help you?"></textarea>
+        </div>
+        <button class="form-submit" onclick="submitContact()">Send Message</button>
+      </div>
+      <div class="success-msg" id="contactSuccess">
+        <div class="check">✓</div>
+        <h4>Message Sent!</h4>
+        <p>Will's team will get back to you within 24–48 hours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Will Parfitt</div>
+  <p>© 2026 Will Parfitt Official. All rights reserved.</p>
+</footer>
+
+<!-- TICKET MODAL -->
+<div class="modal-overlay" id="ticketModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div id="modalForm">
+      <p class="modal-eyebrow">Secure Checkout</p>
+      <h3 id="modalTitle">Event Name</h3>
+      <div class="ticket-price">
+        <span class="price" id="modalPrice">£45</span>
+        <span class="per">per ticket</span>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" placeholder="Jane">
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Smith">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="jane@example.com">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>No. of Tickets</label>
+          <select>
+            <option>1</option><option>2</option><option>3</option><option>4</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Ticket Type</label>
+          <select id="ticketType">
+            <option>General Admission</option>
+            <option>VIP</option>
+            <option>Front Row</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Card Number</label>
+        <input type="text" placeholder="•••• •••• •••• ••••" maxlength="19">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Expiry</label>
+          <input type="text" placeholder="MM / YY" maxlength="7">
+        </div>
+        <div class="form-group">
+          <label>CVV</label>
+          <input type="text" placeholder="•••" maxlength="4">
+        </div>
+      </div>
+      <button class="form-submit" onclick="submitTicket()">Purchase Tickets</button>
+    </div>
+    <div class="success-msg" id="ticketSuccess">
+      <div class="check">✓</div>
+      <h4>Booking Confirmed!</h4>
+      <p>Your tickets are on their way. Check your inbox for confirmation and entry details.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  const events = [
+    { day:'23', month:'Apr', venue:'Seinäjoki', location:'Finland', price:'€45', tag:'Finland', sold: false },
+    { day:'24', month:'Apr', venue:'Helsinki', location:'Finland', price:'€45', tag:'Finland', sold: false },
+    { day:'25', month:'Apr', venue:'Turku', location:'Finland', price:'€45', tag:'Finland', sold: false },
+    { day:'26', month:'Apr', venue:'Lahti', location:'Finland', price:'€45', tag:'Finland', sold: false },
+    { day:'29', month:'Apr', venue:'Umeå', location:'Sweden', price:'SEK 450', tag:'Sweden', sold: false },
+    { day:'30', month:'Apr', venue:'Gävle', location:'Sweden', price:'SEK 450', tag:'Sweden', sold: false },
+    { day:'01', month:'May', venue:'Stockholm', location:'Sweden', price:'SEK 450', tag:'Sweden', sold: false },
+    { day:'02', month:'May', venue:'Stockholm', location:'Sweden', price:'SEK 450', tag:'Sweden', sold: false },
+    { day:'03', month:'May', venue:'SundsVall', location:'Sweden', price:'SEK 450', tag:'Sweden', sold: false },
+    { day:'05', month:'May', venue:'Västerås', location:'Sweden', price:'SEK 450', tag:'Sweden', sold: false },
+    { day:'06', month:'May', venue:'Borås', location:'Sweden', price:'SEK 450', tag:'Sweden', sold: false },
+    { day:'07', month:'May', venue:'Odense', location:'Denmark', price:'DKK 350', tag:'Denmark', sold: false },
+    { day:'08', month:'May', venue:'Lund', location:'Sweden', price:'SEK 450', tag:'Sweden', sold: false },
+    { day:'09', month:'May', venue:'Copenhagen', location:'Denmark', price:'DKK 350', tag:'Denmark', sold: false },
+    { day:'10', month:'May', venue:'Helsingborg', location:'Sweden', price:'SEK 450', tag:'Sweden', sold: false },
+    { day:'12', month:'May', venue:'Molde', location:'Norway', price:'NOK 450', tag:'Norway', sold: false },
+    { day:'13', month:'May', venue:'Trondheim', location:'Norway', price:'NOK 450', tag:'Norway', sold: false },
+    { day:'14', month:'May', venue:'Ålesund', location:'Norway', price:'NOK 450', tag:'Norway', sold: false },
+    { day:'15', month:'May', venue:'Oslo', location:'Norway', price:'NOK 450', tag:'Norway', sold: false },
+    { day:'16', month:'May', venue:'Örebro', location:'Sweden', price:'SEK 450', tag:'Sweden', sold: false },
+    { day:'17', month:'May', venue:'Norrköping', location:'Sweden', price:'SEK 450', tag:'Sweden', sold: false },
+    { day:'21', month:'May', venue:'Os', location:'Norway', price:'NOK 450', tag:'Norway', sold: false },
+    { day:'22', month:'May', venue:'Haugesund', location:'Norway', price:'NOK 450', tag:'Norway', sold: false },
+    { day:'23', month:'May', venue:'Fredrikstad', location:'Norway', price:'NOK 450', tag:'Norway', sold: false },
+    { day:'24', month:'May', venue:'Tønsberg', location:'Norway', price:'NOK 450', tag:'Norway', sold: false },
+    { day:'04', month:'Jun', venue:'Amsterdam', location:'Netherlands', price:'€55', tag:'Netherlands', sold: false },
+    { day:'05', month:'Jun', venue:'Rotterdam', location:'Netherlands', price:'€55', tag:'Netherlands', sold: false },
+    { day:'06', month:'Jun', venue:'Eindhoven', location:'Netherlands', price:'€55', tag:'Netherlands', sold: false },
+    { day:'07', month:'Jun', venue:'Maastricht', location:'Netherlands', price:'€55', tag:'Netherlands', sold: false },
+    { day:'10', month:'Jun', venue:'Hasselt', location:'Belgium', price:'€50', tag:'Belgium', sold: false },
+    { day:'11', month:'Jun', venue:'Gent', location:'Belgium', price:'€50', tag:'Belgium', sold: false },
+    { day:'12', month:'Jun', venue:'Antwerp', location:'Belgium', price:'€50', tag:'Belgium', sold: false },
+    { day:'13', month:'Jun', venue:'Brussels', location:'Belgium', price:'€50', tag:'Belgium', sold: false },
+    { day:'25', month:'Jun', venue:'Greymouth', location:'New Zealand', price:'NZ$75', tag:'New Zealand', sold: false },
+    { day:'26', month:'Jun', venue:'Christchurch', location:'New Zealand', price:'NZ$75', tag:'New Zealand', sold: false },
+    { day:'27', month:'Jun', venue:'Invercargill', location:'New Zealand', price:'NZ$75', tag:'New Zealand', sold: false },
+    { day:'28', month:'Jun', venue:'Dunedin Matinee', location:'New Zealand', price:'NZ$75', tag:'New Zealand', sold: false },
+    { day:'28', month:'Jun', venue:'Dunedin Evening', location:'New Zealand', price:'NZ$75', tag:'New Zealand', sold: false },
+    { day:'01', month:'Jul', venue:'Lower Hutt', location:'New Zealand', price:'NZ$75', tag:'New Zealand', sold: false },
+    { day:'02', month:'Jul', venue:'Tauranga', location:'New Zealand', price:'NZ$75', tag:'New Zealand', sold: false },
+    { day:'03', month:'Jul', venue:'New Plymouth', location:'New Zealand', price:'NZ$75', tag:'New Zealand', sold: false },
+    { day:'04', month:'Jul', venue:'Whanganui', location:'New Zealand', price:'NZ$75', tag:'New Zealand', sold: false },
+    { day:'05', month:'Jul', venue:'Napier', location:'New Zealand', price:'NZ$75', tag:'New Zealand', sold: false },
+    { day:'07', month:'Jul', venue:'Rotorua', location:'New Zealand', price:'NZ$75', tag:'New Zealand', sold: false },
+    { day:'08', month:'Jul', venue:'Gisborne', location:'New Zealand', price:'NZ$75', tag:'New Zealand', sold: false },
+    { day:'09', month:'Jul', venue:'Hamilton', location:'New Zealand', price:'NZ$75', tag:'New Zealand', sold: false },
+    { day:'10', month:'Jul', venue:'Hastings', location:'New Zealand', price:'NZ$75', tag:'New Zealand', sold: false },
+    { day:'11', month:'Jul', venue:'Auckland', location:'New Zealand', price:'NZ$75', tag:'New Zealand', sold: false },
+    { day:'12', month:'Jul', venue:'Whangarei', location:'New Zealand', price:'NZ$75', tag:'New Zealand', sold: false },
+    { day:'15', month:'Jul', venue:'Saskatoon', location:'Canada', price:'CAD$85', tag:'Canada', sold: false },
+    { day:'16', month:'Jul', venue:'Vernon', location:'Canada', price:'CAD$85', tag:'Canada', sold: false },
+    { day:'17', month:'Jul', venue:'Kelowna', location:'Canada', price:'CAD$85', tag:'Canada', sold: false },
+    { day:'18', month:'Jul', venue:'Vancouver', location:'Canada', price:'CAD$85', tag:'Canada', sold: false },
+    { day:'19', month:'Jul', venue:'Vancouver', location:'Canada', price:'CAD$85', tag:'Canada', sold: false },
+    { day:'22', month:'Jul', venue:'TikTok Event', location:'Canada', price:'CAD$85', tag:'Canada', sold: false },
+    { day:'24', month:'Jul', venue:'Toronto', location:'Canada', price:'CAD$85', tag:'Canada', sold: false },
+    { day:'30', month:'Jul', venue:'Sudbury', location:'Canada', price:'CAD$85', tag:'Canada', sold: false },
+    { day:'31', month:'Jul', venue:'Ottawa', location:'Canada', price:'CAD$85', tag:'Canada', sold: false },
+    { day:'01', month:'Aug', venue:'Montreal', location:'Canada', price:'CAD$85', tag:'Canada', sold: false },
+    { day:'02', month:'Aug', venue:'Montreal', location:'Canada', price:'CAD$85', tag:'Canada', sold: false },
+    { day:'04', month:'Aug', venue:'Winnipeg', location:'Canada', price:'CAD$85', tag:'Canada', sold: false },
+    { day:'07', month:'Aug', venue:'Edmonton', location:'Canada', price:'CAD$85', tag:'Canada', sold: false },
+    { day:'08', month:'Aug', venue:'Calgary', location:'Canada', price:'CAD$85', tag:'Canada', sold: false },
+    { day:'09', month:'Aug', venue:'Banff', location:'Canada', price:'CAD$85', tag:'Canada', sold: false },
+    { day:'TBA', month:'TBA', venue:'USA Dates', location:'United States', price:'TBA', tag:'USA', sold: false },
+  ];
+
+  function renderEvents(filter = '') {
+    const list = document.getElementById('eventList');
+    const filteredEvents = events.filter(e =>
+      e.venue.toLowerCase().includes(filter.toLowerCase()) ||
+      e.location.toLowerCase().includes(filter.toLowerCase())
+    );
+    list.innerHTML = filteredEvents.map((e, i) => {
+      const originalIndex = events.indexOf(e);
+      return `
+        <div class="event-item" onclick="${!e.sold ? `openModal(${originalIndex})` : ''}">
+          <div class="event-date">
+            <div class="day">${e.day}</div>
+            <div class="month">${e.month}</div>
+          </div>
+          <div class="event-info">
+            <div class="venue">${e.venue}</div>
+            <div class="location">${e.location}</div>
+            ${e.tag ? `<span class="tag">${e.tag}</span>` : ''}
+          </div>
+          <div class="event-action">
+            ${e.sold
+              ? `<div class="sold-out">Sold Out</div>`
+              : `<button class="buy-btn" onclick="event.stopPropagation(); openModal(${originalIndex})">Buy Tickets</button>`
+            }
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function openModal(i) {
+    const e = events[i];
+    document.getElementById('modalTitle').textContent = `${e.venue} — ${e.day} ${e.month}`;
+    document.getElementById('modalPrice').textContent = e.price;
+    document.getElementById('modalForm').style.display = 'block';
+    document.getElementById('ticketSuccess').style.display = 'none';
+    document.getElementById('ticketModal').classList.add('open');
+  }
+
+  function closeModal() {
+    document.getElementById('ticketModal').classList.remove('open');
+  }
+
+  function submitTicket() {
+    const firstName = document.querySelector('#ticketModal input[placeholder="Jane"]').value.trim();
+    const lastName = document.querySelector('#ticketModal input[placeholder="Smith"]').value.trim();
+    const email = document.querySelector('#ticketModal input[placeholder="jane@example.com"]').value.trim();
+    const tickets = document.querySelector('#ticketModal select').value;
+    const type = document.getElementById('ticketType').value;
+    const eventTitle = document.getElementById('modalTitle').textContent;
+
+    if (!firstName || !lastName) {
+      alert('Please enter your full name.');
+      return;
+    }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+
+    // Send purchase email
+    const subject = `Ticket Purchase: ${eventTitle}`;
+    const body = `Name: ${firstName} ${lastName}\nEmail: ${email}\nEvent: ${eventTitle}\nTickets: ${tickets}\nType: ${type}`;
+    const mailtoLink = `mailto:Specialprojects638@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoLink;
+
+    document.getElementById('modalForm').style.display = 'none';
+    document.getElementById('ticketSuccess').style.display = 'block';
+    setTimeout(closeModal, 3500);
+  }
+
+  function submitContact() {
+    const name = document.getElementById('cName').value.trim();
+    const email = document.getElementById('cEmail').value.trim();
+    const subject = document.getElementById('cSubject').value;
+    const message = document.getElementById('cMessage').value.trim();
+
+    if (!name) {
+      alert('Please enter your name.');
+      return;
+    }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+    if (!subject) {
+      alert('Please select a subject.');
+      return;
+    }
+    if (!message) {
+      alert('Please enter a message.');
+      return;
+    }
+
+    // Send email using mailto
+    const mailtoLink = `mailto:Specialprojects638@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`)}`;
+    window.location.href = mailtoLink;
+
+    document.getElementById('contactFormWrap').style.display = 'none';
+    document.getElementById('contactSuccess').style.display = 'block';
+  }
+
+  document.getElementById('ticketModal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  document.getElementById('eventSearch').addEventListener('input', function() {
+    renderEvents(this.value);
+  });
+
+  renderEvents();
+</script>
+</body>
+</html>
